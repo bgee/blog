@@ -76,7 +76,7 @@ def add_comment():
 @app.route('/post/<title>')
 def show_post(title):
     db = get_db()
-    cur = db.execute('select title, text from entries order by id desc')
+    cur = db.execute('select title, text from entries where title=(?) order by id desc', [title])
     entries = cur.fetchall()
     return render_template('show_posts.html', entries=entries)
 
